@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: noma-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: noma
+      POSTGRES_PASSWORD: noma123
+      POSTGRES_DB: nomacardhouse
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U noma"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Uncomment this section if you want to run the app in Docker too
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: noma-app
+  #   restart: always
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     DATABASE_URL: postgresql://noma:noma123@postgres:5432/nomacardhouse
+  #     NEXTAUTH_SECRET: your-secret-here-change-in-production
+  #     NEXTAUTH_URL: http://localhost:3000
+  #     NEXT_PUBLIC_APP_URL: http://localhost:3000
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #   volumes:
+  #     - ./public/uploads:/app/public/uploads
+
+volumes:
+  postgres_data:

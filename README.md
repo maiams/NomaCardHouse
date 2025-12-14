@@ -34,6 +34,37 @@ Portal de vendas completo para a Noma Card House, especializada em Trading Card 
 
 ## 📦 Installation
 
+### 🚀 Quick Start (Recommended)
+
+**Linux/macOS:**
+```bash
+git clone <repository-url>
+cd NomaCardHouse
+chmod +x setup.sh
+./setup.sh
+```
+
+**Windows:**
+```bash
+git clone <repository-url>
+cd NomaCardHouse
+setup.bat
+```
+
+The setup script will automatically:
+- ✅ Install dependencies
+- ✅ Create `.env` file
+- ✅ Start PostgreSQL with Docker
+- ✅ Setup database schema
+- ✅ Seed with sample data
+
+Then just run:
+```bash
+npm run dev
+```
+
+### 📝 Manual Installation
+
 1. **Clone the repository**
 ```bash
 git clone <repository-url>
@@ -52,7 +83,7 @@ cp .env.example .env
 
 Edit `.env` with your configuration:
 ```env
-DATABASE_URL="postgresql://user:password@localhost:5432/nomacardhouse"
+DATABASE_URL="postgresql://noma:noma123@localhost:5432/nomacardhouse"
 NEXTAUTH_SECRET="your-secret-here"
 NEXTAUTH_URL="http://localhost:3000"
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="pk_test_..."
@@ -61,18 +92,39 @@ STRIPE_WEBHOOK_SECRET="whsec_..."
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
 ```
 
-4. **Set up database**
+4. **Start PostgreSQL with Docker**
+```bash
+docker-compose up -d postgres
+```
+
+5. **Set up database**
 ```bash
 npm run db:push
 npm run db:seed
 ```
 
-5. **Run development server**
+6. **Run development server**
 ```bash
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000)
+
+### 🐳 Full Docker Setup
+
+To run everything in Docker (app + database):
+
+1. Edit `docker-compose.yml` - Uncomment the `app` service
+2. Run:
+```bash
+docker-compose up -d
+```
+
+### 👤 Admin Credentials
+
+After seeding, you can login with:
+- **Email:** admin@nomacardhouse.com
+- **Password:** admin123
 
 ## 📁 Project Structure
 
@@ -173,19 +225,58 @@ Replace the text logo in `src/components/Header.tsx` with your logo image.
 
 ## 🚀 Deployment
 
-### Vercel (Recommended)
+### Option 1: Vercel + Managed Database (Recommended)
 
 1. Push code to GitHub
 2. Import project in Vercel
 3. Add environment variables
 4. Deploy
 
-### Database
-Use a managed PostgreSQL service:
-- **Supabase** (recommended)
-- **Railway**
-- **Neon**
-- **PlanetScale**
+**Managed Database Options:**
+- **Supabase** (recommended) - Free PostgreSQL with dashboard
+- **Railway** - Easy PostgreSQL hosting
+- **Neon** - Serverless Postgres
+- **Render** - Free PostgreSQL tier
+
+### Option 2: Docker Deployment
+
+**Using Docker Compose (Full Stack):**
+```bash
+# Edit docker-compose.yml and uncomment the app service
+docker-compose up -d
+
+# View logs
+docker-compose logs -f app
+
+# Stop services
+docker-compose down
+```
+
+**Using Dockerfile Only:**
+```bash
+# Build image
+docker build -t noma-card-house .
+
+# Run with environment variables
+docker run -p 3000:3000 \
+  -e DATABASE_URL="postgresql://..." \
+  -e STRIPE_SECRET_KEY="sk_..." \
+  -e NEXTAUTH_SECRET="..." \
+  noma-card-house
+```
+
+### Production Environment Variables
+
+**Required for production:**
+```env
+DATABASE_URL=postgresql://user:pass@host:5432/db
+NEXTAUTH_SECRET=<generate with: openssl rand -base64 32>
+NEXTAUTH_URL=https://yourdomain.com
+NEXT_PUBLIC_APP_URL=https://yourdomain.com
+STRIPE_SECRET_KEY=sk_live_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
+```
 
 ## 📝 License
 
