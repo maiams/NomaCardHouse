@@ -1,40 +1,36 @@
 # Noma Card House - TCG Sales Portal
 
-Portal de vendas completo para a Noma Card House, especializada em Trading Card Games (TCG).
+Complete e-commerce platform for Noma Card House, a Trading Card Game specialist retailer.
 
-## 🚀 Features
+## Features
 
 ### Customer Features
-- **Product Catalog**: Browse packs, single cards, accessories, and sealed products
-- **Search & Filters**: Find products by name, category, rarity, condition
-- **Shopping Cart**: Add/remove items with persistent storage
-- **Checkout**: Complete purchase with shipping information
-- **Payment Methods**:
-  - PIX
-  - Credit Card
-  - Apple Pay
-  - Google Pay
-- **Responsive Design**: Full mobile and tablet support
+- Product catalog with packs, single cards, accessories, and sealed products
+- Search and filtering by name, category, rarity, and condition
+- Shopping cart with persistent storage
+- Checkout with shipping information
+- Multiple payment methods: PIX, Credit Card, Apple Pay, Google Pay
+- Responsive design for mobile and tablet devices
 
 ### Admin Features
-- **Product Management**: Create, edit, delete products
-- **Inventory Control**: Track stock quantities
-- **Category Management**: Organize products by categories
-- **Order Management**: View and manage customer orders
-- **Image Upload**: Upload product images
+- Product management (create, edit, delete)
+- Inventory tracking and stock control
+- Category management
+- Order management and tracking
+- Product image upload
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-- **Framework**: Next.js 14 (TypeScript)
-- **Database**: PostgreSQL with Prisma ORM
-- **Styling**: Tailwind CSS
-- **State Management**: Zustand
-- **Payments**: Stripe (supports PIX, Cards, Apple Pay, Google Pay)
-- **Icons**: Lucide React
+- Framework: Next.js 14 (TypeScript)
+- Database: PostgreSQL with Prisma ORM
+- Styling: Tailwind CSS
+- State Management: Zustand
+- Payments: Stripe (supports PIX, Cards, Apple Pay, Google Pay)
+- Icons: Lucide React
 
-## 📦 Installation
+## Installation
 
-### 🚀 Quick Start (Recommended)
+### Quick Start (Recommended)
 
 **Linux/macOS:**
 ```bash
@@ -51,32 +47,32 @@ cd NomaCardHouse
 setup.bat
 ```
 
-The setup script will automatically:
-- ✅ Install dependencies
-- ✅ Create `.env` file
-- ✅ Start PostgreSQL with Docker
-- ✅ Setup database schema
-- ✅ Seed with sample data
+The setup script will:
+- Install dependencies
+- Create `.env` file
+- Start PostgreSQL with Docker
+- Setup database schema
+- Seed with sample data
 
-Then just run:
+Then run:
 ```bash
 npm run dev
 ```
 
-### 📝 Manual Installation
+### Manual Installation
 
-1. **Clone the repository**
+1. Clone the repository
 ```bash
 git clone <repository-url>
 cd NomaCardHouse
 ```
 
-2. **Install dependencies**
+2. Install dependencies
 ```bash
 npm install
 ```
 
-3. **Set up environment variables**
+3. Set up environment variables
 ```bash
 cp .env.example .env
 ```
@@ -92,25 +88,25 @@ STRIPE_WEBHOOK_SECRET="whsec_..."
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
 ```
 
-4. **Start PostgreSQL with Docker**
+4. Start PostgreSQL with Docker
 ```bash
 docker-compose up -d postgres
 ```
 
-5. **Set up database**
+5. Set up database
 ```bash
 npm run db:push
 npm run db:seed
 ```
 
-6. **Run development server**
+6. Run development server
 ```bash
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000)
 
-### 🐳 Full Docker Setup
+### Full Docker Setup
 
 To run everything in Docker (app + database):
 
@@ -120,13 +116,13 @@ To run everything in Docker (app + database):
 docker-compose up -d
 ```
 
-### 👤 Admin Credentials
+### Admin Credentials
 
-After seeding, you can login with:
-- **Email:** admin@nomacardhouse.com
-- **Password:** admin123
+After seeding, login with:
+- Email: admin@nomacardhouse.com
+- Password: admin123
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 NomaCardHouse/
@@ -155,16 +151,16 @@ NomaCardHouse/
 └── package.json
 ```
 
-## 🗄️ Database Schema
+## Database Schema
 
-- **User**: Admin users
-- **Category**: Product categories
-- **Product**: TCG products (packs, singles, sealed items)
-- **Image**: Product images
-- **Order**: Customer orders
-- **OrderItem**: Order line items
+- User: Admin users
+- Category: Product categories
+- Product: TCG products (packs, singles, sealed items)
+- Image: Product images
+- Order: Customer orders
+- OrderItem: Order line items
 
-## 🔐 Payment Integration
+## Payment Integration
 
 ### Stripe Setup
 
@@ -178,12 +174,12 @@ NomaCardHouse/
 
 ### Supported Payment Methods
 
-- **Credit/Debit Cards**: Via Stripe Checkout
-- **PIX**: Brazilian instant payment (Stripe)
-- **Apple Pay**: Mobile payments
-- **Google Pay**: Mobile payments
+- Credit/Debit Cards: Via Stripe Checkout
+- PIX: Brazilian instant payment (Stripe)
+- Apple Pay: Mobile payments
+- Google Pay: Mobile payments
 
-## 📱 API Endpoints
+## API Endpoints
 
 ### Products
 - `GET /api/products` - List products (with filters)
@@ -206,7 +202,7 @@ NomaCardHouse/
 ### Checkout
 - `POST /api/checkout` - Create Stripe checkout session
 
-## 🎨 Customization
+## Customization
 
 ### Colors
 Edit `tailwind.config.ts` to customize the primary color:
@@ -223,24 +219,24 @@ colors: {
 ### Logo
 Replace the text logo in `src/components/Header.tsx` with your logo image.
 
-## 🚀 Deployment
+## Deployment
 
-### Option 1: Vercel + Managed Database (Recommended)
+### Option 1: Vercel + Managed Database
 
 1. Push code to GitHub
 2. Import project in Vercel
 3. Add environment variables
 4. Deploy
 
-**Managed Database Options:**
-- **Supabase** (recommended) - Free PostgreSQL with dashboard
-- **Railway** - Easy PostgreSQL hosting
-- **Neon** - Serverless Postgres
-- **Render** - Free PostgreSQL tier
+Managed Database Options:
+- Supabase - Free PostgreSQL with dashboard
+- Railway - Easy PostgreSQL hosting
+- Neon - Serverless Postgres
+- Render - Free PostgreSQL tier
 
 ### Option 2: Docker Deployment
 
-**Using Docker Compose (Full Stack):**
+Using Docker Compose (Full Stack):
 ```bash
 # Edit docker-compose.yml and uncomment the app service
 docker-compose up -d
@@ -252,7 +248,7 @@ docker-compose logs -f app
 docker-compose down
 ```
 
-**Using Dockerfile Only:**
+Using Dockerfile Only:
 ```bash
 # Build image
 docker build -t noma-card-house .
@@ -267,7 +263,7 @@ docker run -p 3000:3000 \
 
 ### Production Environment Variables
 
-**Required for production:**
+Required for production:
 ```env
 DATABASE_URL=postgresql://user:pass@host:5432/db
 NEXTAUTH_SECRET=<generate with: openssl rand -base64 32>
@@ -278,14 +274,10 @@ STRIPE_WEBHOOK_SECRET=whsec_...
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
 ```
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License.
 
-## 🤝 Support
+## Support
 
 For support, email contato@nomacardhouse.com or open an issue.
-
----
-
-Built with ❤️ for TCG enthusiasts
