@@ -2,9 +2,27 @@ from rest_framework import serializers
 from .models import Product, SKU
 
 
+class ProductSummarySerializer(serializers.ModelSerializer):
+    """
+    Lightweight product info to embed in SKU responses.
+    """
+
+    class Meta:
+        model = Product
+        fields = [
+            'id',
+            'name',
+            'slug',
+            'brand',
+            'set_name',
+            'rarity',
+        ]
+
+
 class SKUSerializer(serializers.ModelSerializer):
     """
     Serializer for SKU with inventory and pricing info.
+    Includes lightweight product info for cart/order contexts.
     """
     price_brl = serializers.DecimalField(
         max_digits=10,
@@ -20,6 +38,7 @@ class SKUSerializer(serializers.ModelSerializer):
 
     is_in_stock = serializers.SerializerMethodField()
     quantity_available = serializers.SerializerMethodField()
+    product = ProductSummarySerializer(read_only=True)
 
     class Meta:
         model = SKU
@@ -37,6 +56,7 @@ class SKUSerializer(serializers.ModelSerializer):
             'is_active',
             'is_in_stock',
             'quantity_available',
+            'product',
         ]
 
     def get_is_in_stock(self, obj):

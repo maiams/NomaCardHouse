@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Price } from '@/components/common/Price';
@@ -10,30 +9,18 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const hasStock = product.total_available > 0;
-  const lowestPrice = product.lowest_price
-    ? parseFloat(product.lowest_price)
-    : null;
+  const hasStock = product.is_in_stock;
+  const lowestPrice = product.min_price_brl;
 
   return (
     <Link href={`/product/${product.slug}`}>
       <Card className="group h-full overflow-hidden transition-all hover:shadow-lg">
         <div className="relative aspect-[3/4] overflow-hidden bg-muted">
-          {product.image_url ? (
-            <Image
-              src={product.image_url}
-              alt={product.name}
-              fill
-              className="object-cover transition-transform group-hover:scale-105"
-              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center bg-muted">
-              <span className="text-4xl font-bold text-muted-foreground">
-                {product.name.charAt(0)}
-              </span>
-            </div>
-          )}
+          <div className="flex h-full items-center justify-center bg-muted">
+            <span className="text-4xl font-bold text-muted-foreground">
+              {product.name.charAt(0)}
+            </span>
+          </div>
 
           {product.rarity && (
             <Badge
