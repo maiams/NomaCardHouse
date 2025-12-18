@@ -70,7 +70,7 @@ export default function CheckoutPage() {
     return null;
   }
 
-  const subtotal = parseFloat(cart.subtotal);
+  const subtotal = cart.subtotal_brl;
 
   return (
     <main id="main-content" className="flex-1 py-8">
@@ -102,7 +102,7 @@ export default function CheckoutPage() {
                   {cart.items.map((item) => (
                     <div key={item.id} className="flex justify-between text-sm">
                       <div className="flex-1">
-                        <p className="font-medium">{item.sku.product.name}</p>
+                        <p className="font-medium">{item.sku.product?.name || item.sku.sku_code}</p>
                         <div className="flex gap-1 text-xs text-muted-foreground">
                           <Badge variant="outline" className="text-xs">
                             {t(`product.conditions.${item.sku.condition}`)}
@@ -116,12 +116,10 @@ export default function CheckoutPage() {
                             </Badge>
                           )}
                         </div>
-                        <p className="text-xs text-muted-foreground">
-                          Qtd: {item.quantity}
-                        </p>
+                        <p className="text-xs text-muted-foreground">Qtd: {item.quantity}</p>
                       </div>
                       <Price
-                        value={parseFloat(item.unit_price) * item.quantity}
+                        value={item.line_total_brl}
                         className="text-sm"
                       />
                     </div>

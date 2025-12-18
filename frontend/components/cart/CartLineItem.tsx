@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
@@ -45,32 +44,22 @@ export function CartLineItem({
     }
   };
 
-  const itemTotal = parseFloat(item.unit_price) * item.quantity;
-  const maxQuantity = Math.min(item.sku.inventory?.quantity_available || 99, 99);
+  const itemTotal = item.line_total_brl;
+  const maxQuantity = Math.min(item.sku.quantity_available || 99, 99);
 
   return (
     <div className="flex gap-4 border-b pb-4">
       <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-md bg-muted">
-        {item.sku.product.image_url ? (
-          <Image
-            src={item.sku.product.image_url}
-            alt={item.sku.product.name}
-            fill
-            className="object-cover"
-            sizes="96px"
-          />
-        ) : (
-          <div className="flex h-full items-center justify-center">
-            <span className="text-2xl font-bold text-muted-foreground">
-              {item.sku.product.name.charAt(0)}
-            </span>
-          </div>
-        )}
+        <div className="flex h-full items-center justify-center">
+          <span className="text-2xl font-bold text-muted-foreground">
+            {item.sku.product?.name?.charAt(0) || item.sku.sku_code.charAt(0)}
+          </span>
+        </div>
       </div>
 
       <div className="flex flex-1 flex-col justify-between">
         <div>
-          <h3 className="font-semibold">{item.sku.product.name}</h3>
+          <h3 className="font-semibold">{item.sku.product?.name || item.sku.sku_code}</h3>
 
           <div className="mt-1 flex flex-wrap gap-2">
             <Badge variant="outline" className="text-xs">
@@ -88,7 +77,7 @@ export function CartLineItem({
 
           <div className="mt-2 flex items-center gap-4">
             <Price
-              value={item.unit_price}
+              value={item.unit_price_brl}
               className="text-sm text-muted-foreground"
             />
             <span className="text-sm text-muted-foreground">×</span>

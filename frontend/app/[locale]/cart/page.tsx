@@ -91,7 +91,7 @@ export default function CartPage() {
   }
 
   const isEmpty = !cart || cart.items.length === 0;
-  const subtotal = cart?.subtotal ? parseFloat(cart.subtotal) : 0;
+  const subtotal = cart?.subtotal_brl ?? 0;
 
   return (
     <main id="main-content" className="flex-1 py-8">

@@ -82,7 +82,7 @@ export default function OrderPage({ params }: OrderPageProps) {
 
   const isPix = order.payment_method === 'PIX';
   const isBoleto = order.payment_method === 'BOLETO';
-  const totalAmount = parseFloat(order.total_amount);
+  const totalAmount = order.total_brl;
 
   return (
     <main id="main-content" className="flex-1 py-8">

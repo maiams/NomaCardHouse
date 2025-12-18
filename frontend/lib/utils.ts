@@ -6,14 +6,13 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
- * Format price in BRL currency
+ * Format price in BRL currency (expects value in reais)
  */
-export function formatPrice(cents: number): string {
-  const reais = cents / 100;
+export function formatPrice(value: number): string {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
-  }).format(reais);
+  }).format(value);
 }
 
 /**

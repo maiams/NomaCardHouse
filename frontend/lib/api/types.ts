@@ -27,9 +27,19 @@ export interface Product {
   tcg_number?: string;
   rarity: string;
   is_active: boolean;
-  min_price_brl: string;
+  min_price_brl: number | null;
   is_in_stock: boolean;
   created_at: string;
+  image_url?: string | null;
+}
+
+export interface ProductSummary {
+  id: string;
+  name: string;
+  slug: string;
+  brand: string;
+  set_name: string;
+  rarity: string;
 }
 
 export interface SKU {
@@ -40,12 +50,13 @@ export interface SKU {
   is_foil: boolean;
   price_cents: number;
   sale_price_cents: number | null;
-  price_brl: string;
-  effective_price_brl: string;
+  price_brl: number;
+  effective_price_brl: number;
   currency: string;
   is_active: boolean;
   is_in_stock: boolean;
   quantity_available: number;
+  product?: ProductSummary;
 }
 
 export interface ProductDetail extends Product {
@@ -58,9 +69,9 @@ export interface CartItem {
   sku: SKU;
   quantity: number;
   unit_price_cents: number;
-  unit_price_brl: string;
+  unit_price_brl: number;
   line_total_cents: number;
-  line_total_brl: string;
+  line_total_brl: number;
   reserved_until: string;
   is_reservation_expired: boolean;
 }
@@ -73,7 +84,7 @@ export interface Cart {
   items: CartItem[];
   total_items: number;
   subtotal_cents: number;
-  subtotal_brl: string;
+  subtotal_brl: number;
 }
 
 // Order types
@@ -82,9 +93,9 @@ export interface OrderItem {
   sku: string;
   quantity: number;
   unit_price_cents: number;
-  unit_price_brl: string;
+  unit_price_brl: number;
   line_total_cents: number;
-  line_total_brl: string;
+  line_total_brl: number;
   product_snapshot: Record<string, any>;
 }
 
@@ -105,11 +116,11 @@ export interface Order {
   shipping_cep: string;
   full_address: string;
   subtotal_cents: number;
-  subtotal_brl: string;
+  subtotal_brl: number;
   shipping_cents: number;
   discount_cents: number;
   total_cents: number;
-  total_brl: string;
+  total_brl: number;
   currency: string;
   items: OrderItem[];
   total_items: number;
@@ -139,7 +150,7 @@ export interface PaymentInfo {
   transaction_id: string;
   method: string;
   status: string;
-  amount_brl: string;
+  amount_brl: number;
   pix_qr_code?: string;
   pix_copy_paste?: string;
   boleto_url?: string;
