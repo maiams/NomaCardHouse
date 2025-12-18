@@ -1,0 +1,180 @@
+{
+  "nav": {
+    "home": "Início",
+    "catalog": "Catálogo",
+    "cart": "Carrinho",
+    "account": "Conta"
+  },
+  "home": {
+    "title": "Bem-vindo à Noma Card House",
+    "subtitle": "Sua loja premium de TCG no Brasil",
+    "cta": "Explorar Catálogo",
+    "featured": "Produtos em Destaque",
+    "viewAll": "Ver Todos os Produtos"
+  },
+  "catalog": {
+    "title": "Catálogo de Produtos",
+    "search": "Buscar produtos...",
+    "searchPlaceholder": "Digite o nome do card ou coleção",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "noResults": "Nenhum produto encontrado",
+    "noResultsDescription": "Tente ajustar sua busca ou filtros",
+    "showingResults": "Mostrando {count} produtos",
+    "clearFilters": "Limpar Filtros"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "errorOccurred": "Ocorreu um erro",
+    "tryAgain": "Tentar Novamente",
+    "addToCart": "Adicionar ao Carrinho",
+    "addedToCart": "Adicionado ao carrinho",
+    "outOfStock": "Fora de Estoque",
+    "inStock": "Em Estoque",
+    "limitedStock": "{count} disponíveis",
+    "price": "Preço",
+    "quantity": "Quantidade",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "continue": "Continuar",
+    "continueShopping": "Continuar Comprando",
+    "back": "Voltar",
+    "close": "Fechar",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "remove": "Remover",
+    "edit": "Editar",
+    "view": "Ver",
+    "select": "Selecionar"
+  },
+  "cart": {
+    "title": "Seu Carrinho",
+    "empty": "Seu carrinho está vazio",
+    "emptyDescription": "Adicione produtos ao carrinho para continuar",
+    "subtotal": "Subtotal",
+    "shipping": "Frete",
+    "shippingCalculated": "Calculado no checkout",
+    "total": "Total",
+    "checkout": "Finalizar Compra",
+    "remove": "Remover",
+    "update": "Atualizar",
+    "updating": "Atualizando...",
+    "itemAdded": "Item adicionado",
+    "itemRemoved": "Item removido",
+    "itemUpdated": "Item atualizado",
+    "errorLoading": "Erro ao carregar carrinho",
+    "errorUpdating": "Erro ao atualizar item",
+    "errorRemoving": "Erro ao remover item",
+    "confirmRemove": "Remover este item do carrinho?"
+  },
+  "product": {
+    "details": "Detalhes do Produto",
+    "description": "Descrição",
+    "condition": "Condição",
+    "language": "Idioma",
+    "rarity": "Raridade",
+    "set": "Coleção",
+    "foil": "Foil",
+    "selectOption": "Selecione uma opção",
+    "selectSKU": "Escolha condição, idioma e acabamento",
+    "availability": "Disponibilidade",
+    "addingToCart": "Adicionando...",
+    "errorLoading": "Erro ao carregar produto",
+    "notFound": "Produto não encontrado",
+    "conditions": {
+      "NM": "Near Mint",
+      "LP": "Lightly Played",
+      "MP": "Moderately Played",
+      "HP": "Heavily Played"
+    },
+    "languages": {
+      "EN": "Inglês",
+      "PT": "Português",
+      "ES": "Espanhol",
+      "JP": "Japonês"
+    },
+    "foilOptions": {
+      "true": "Foil",
+      "false": "Normal"
+    }
+  },
+  "checkout": {
+    "title": "Finalizar Compra",
+    "reviewOrder": "Revisar Pedido",
+    "shippingInfo": "Informações de Entrega",
+    "paymentMethod": "Método de Pagamento",
+    "orderSummary": "Resumo do Pedido",
+    "placeOrder": "Confirmar Pedido",
+    "processing": "Processando...",
+    "form": {
+      "fullName": "Nome Completo",
+      "email": "E-mail",
+      "phone": "Telefone",
+      "cpf": "CPF",
+      "zipCode": "CEP",
+      "street": "Rua",
+      "number": "Número",
+      "complement": "Complemento",
+      "neighborhood": "Bairro",
+      "city": "Cidade",
+      "state": "Estado",
+      "required": "Campo obrigatório",
+      "invalidEmail": "E-mail inválido",
+      "invalidCPF": "CPF inválido",
+      "invalidZipCode": "CEP inválido"
+    },
+    "payment": {
+      "pix": "Pix",
+      "boleto": "Boleto Bancário",
+      "selectMethod": "Selecione o método de pagamento"
+    },
+    "errors": {
+      "emptyCart": "Seu carrinho está vazio",
+      "submissionFailed": "Erro ao processar pedido",
+      "tryAgain": "Por favor, tente novamente"
+    }
+  },
+  "order": {
+    "confirmation": "Pedido Confirmado",
+    "thankYou": "Obrigado pela sua compra",
+    "orderNumber": "Número do Pedido",
+    "total": "Total",
+    "paymentInstructions": "Instruções de Pagamento",
+    "pix": {
+      "title": "Pagar com Pix",
+      "instructions": "Escaneie o QR Code ou copie o código abaixo para realizar o pagamento",
+      "qrCode": "QR Code",
+      "copyCode": "Copiar Código",
+      "codeCopied": "Código copiado",
+      "expiresIn": "Expira em 24 horas"
+    },
+    "boleto": {
+      "title": "Pagar com Boleto",
+      "instructions": "Use o código de barras abaixo para realizar o pagamento em qualquer banco ou lotérica",
+      "barcode": "Código de Barras",
+      "copyBarcode": "Copiar Código",
+      "barcodeCopied": "Código copiado",
+      "downloadPDF": "Baixar Boleto PDF",
+      "dueDate": "Vencimento",
+      "expiresIn": "Válido até"
+    },
+    "status": {
+      "pending": "Aguardando Pagamento",
+      "paid": "Pago",
+      "processing": "Processando",
+      "shipped": "Enviado",
+      "delivered": "Entregue",
+      "cancelled": "Cancelado"
+    },
+    "backToHome": "Voltar ao Início"
+  },
+  "footer": {
+    "about": "Sobre",
+    "contact": "Contato",
+    "terms": "Termos de Uso",
+    "privacy": "Privacidade",
+    "rights": "Todos os direitos reservados"
+  }
+}

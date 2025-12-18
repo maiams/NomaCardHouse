@@ -1,0 +1,16 @@
+                                                                                
+ * ▐▛███▜▌ *   Claude Code v2.0.72                                              
+* ▝▜█████▛▘ *  Sonnet 4.5 · Claude Pro                                          
+ *  ▘▘ ▝▝  *   ~\Projects\NomaCardHouse                                         
+══════════════════ Conversation compacted · ctrl+o for history ═════════════════
+  ⎿  Read frontend\components\ui\button.tsx (58 lines)                          
+  ⎿  Read frontend\components\layout\Footer.tsx (64 lines)                      
+  ⎿  Read frontend\components\layout\Header.tsx (98 lines)                      
+  ⎿  Read frontend\components\common\Logo.tsx (20 lines)                        
+  ⎿  Read frontend\components\common\Container.tsx (15 lines)                   
+  ⎿  You've hit your limit · resets 3am (America/Sao_Paulo)                     
+     /upgrade or /extra-usage to finish what you're working on.                 
+                                                                                
+> /extra-usage                                                                  
+  ⎿  Login successful                                                           
+
