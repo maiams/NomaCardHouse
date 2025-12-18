@@ -11,7 +11,12 @@
       "Bash(npm install)",
       "Bash(test:*)",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: implement complete Noma Card House e-commerce platform\n\nAdd full-stack TCG e-commerce platform with Django backend and Next.js frontend.\n\nBackend:\n- Django 5.0 + DRF with PostgreSQL and Redis\n- Product catalog with SKU management \\(condition, language, foil\\)\n- Inventory management with atomic reservations\n- Cart system with 15-minute expiration\n- Order processing with Pix and Boleto stubs\n- Celery tasks for cart cleanup\n- Fixed double-release reservation bug\n- Comprehensive test suite \\(16 tests, all passing\\)\n\nFrontend:\n- Next.js 14 App Router with TypeScript\n- Home page with featured products\n- Product catalog with client-side search\n- Product detail with cascading SKU selection\n- Shopping cart with quantity management\n- Checkout flow with Brazilian address validation\n- Order confirmation with payment instructions\n- Premium UI using shadcn/ui + Radix UI\n- WCAG 2.2 AA accessibility compliance\n- Portuguese i18n with 180+ translation keys\n- Session management with X-Session-ID header\n- Complete backend API integration\n\nGenerated with Claude Code\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git config:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)"
     ]
   }
 }

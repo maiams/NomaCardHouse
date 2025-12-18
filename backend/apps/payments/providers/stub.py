@@ -6,8 +6,9 @@ Returns fake payment data without actual payment processing.
 import hashlib
 import hmac
 import json
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Dict, Any, Optional
+from django.utils import timezone
 from .base import (
     PaymentProvider,
     PaymentRequest,
@@ -36,7 +37,7 @@ class StubPaymentProvider(PaymentProvider):
             success=True,
             provider_transaction_id=transaction_id,
             status='PENDING',
-            expires_at=datetime.now() + timedelta(hours=24),
+            expires_at=timezone.now() + timedelta(hours=24),
             fees_cents=self.calculate_fee(request.amount_cents, request.method),
             raw_payload={
                 'stub': True,
@@ -52,12 +53,12 @@ class StubPaymentProvider(PaymentProvider):
         if request.method == 'PIX':
             response.pix_qr_code = self._generate_pix_qr_code(transaction_id)
             response.pix_copy_paste = self._generate_pix_copy_paste(transaction_id)
-            response.expires_at = datetime.now() + timedelta(hours=2)
+            response.expires_at = timezone.now() + timedelta(hours=2)
 
         elif request.method == 'BOLETO':
             response.boleto_url = f"https://stub-provider.local/boleto/{transaction_id}.pdf"
             response.boleto_barcode = self._generate_boleto_barcode(transaction_id)
-            response.expires_at = datetime.now() + timedelta(days=3)
+            response.expires_at = timezone.now() + timedelta(days=3)
 
         elif request.method in ['CREDIT_CARD', 'DEBIT_CARD']:
             # In real implementation, this would return a redirect URL for 3DS
@@ -82,7 +83,7 @@ class StubPaymentProvider(PaymentProvider):
                 is_valid=True,
                 provider_transaction_id=payload.get('transaction_id'),
                 new_status=payload.get('status', 'COMPLETED'),
-                paid_at=datetime.now() if payload.get('status') == 'COMPLETED' else None
+                paid_at=timezone.now() if payload.get('status') == 'COMPLETED' else None
             )
         except Exception as e:
             return WebhookVerification(

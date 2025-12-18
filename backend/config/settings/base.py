@@ -150,6 +150,19 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
+# Celery Beat schedule (periodic tasks)
+from celery.schedules import crontab
+CELERY_BEAT_SCHEDULE = {
+    'cleanup-expired-carts': {
+        'task': 'apps.cart.tasks.cleanup_expired_carts',
+        'schedule': crontab(minute='0', hour='*/2'),  # Every 2 hours
+    },
+    'cleanup-expired-reservations': {
+        'task': 'apps.cart.tasks.cleanup_expired_reservations',
+        'schedule': crontab(minute='*/10'),  # Every 10 minutes
+    },
+}
+
 # Redis
 REDIS_URL = env('REDIS_URL', default='redis://localhost:6379/0')
 

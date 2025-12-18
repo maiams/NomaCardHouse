@@ -10,7 +10,9 @@ from apps.payments.providers.stub import get_payment_provider
 from apps.payments.providers.base import PaymentRequest
 from .models import Order, OrderItem
 from .serializers import OrderSerializer, CheckoutSerializer
-import uuid
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class OrderViewSet(viewsets.ReadOnlyModelViewSet):
@@ -58,6 +60,57 @@ class OrderViewSet(viewsets.ReadOnlyModelViewSet):
                 status_code=status.HTTP_400_BAD_REQUEST
             )
 
+        # Validate that no reservations have expired
+        expired_items = [item for item in cart.items.all() if item.is_reservation_expired]
+        if expired_items:
+            # Release expired reservations and remove items
+            for item in expired_items:
+                try:
+                    item.release_and_delete()
+                except Exception as e:
+                    logger.warning(f"Error releasing expired item {item.id}: {str(e)}")
+
+            return api_response(
+                data=None,
+                message="Some items in your cart have expired reservations. They have been removed. Please review your cart and try again.",
+                success=False,
+                status_code=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Create deterministic idempotency key before creating order
+        # This prevents duplicate checkouts on retry
+        payment_method = serializer.validated_data['payment_method']
+        idempotency_key = f"{session_id}_{payment_method}"
+
+        # Check if payment already exists (idempotency)
+        existing_payment = PaymentTransaction.objects.filter(
+            idempotency_key=idempotency_key
+        ).select_related('order').first()
+
+        if existing_payment:
+            # Return existing order instead of creating duplicate
+            order = existing_payment.order
+            order_serializer = OrderSerializer(order)
+            response_data = {
+                'order': order_serializer.data,
+                'payment': {
+                    'transaction_id': str(existing_payment.id),
+                    'method': existing_payment.method,
+                    'status': existing_payment.status,
+                    'amount_brl': existing_payment.amount_brl,
+                    'pix_qr_code': existing_payment.pix_qr_code,
+                    'pix_copy_paste': existing_payment.pix_copy_paste,
+                    'boleto_url': existing_payment.boleto_url,
+                    'boleto_barcode': existing_payment.boleto_barcode,
+                    'expires_at': existing_payment.expires_at,
+                }
+            }
+            return api_response(
+                data=response_data,
+                message="Order already exists (idempotent request)",
+                status_code=status.HTTP_200_OK
+            )
+
         try:
             with transaction.atomic():
                 # Create order
@@ -91,10 +144,6 @@ class OrderViewSet(viewsets.ReadOnlyModelViewSet):
 
                     # Consume reserved inventory
                     cart_item.sku.inventory.consume(cart_item.quantity)
-
-                # Create payment transaction
-                payment_method = serializer.validated_data['payment_method']
-                idempotency_key = f"{order.id}_{payment_method}_{uuid.uuid4().hex[:8]}"
 
                 # Get payment provider (using stub for now)
                 provider = get_payment_provider('stub')
