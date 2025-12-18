@@ -78,17 +78,20 @@ class OrderViewSet(viewsets.ReadOnlyModelViewSet):
             )
 
         # Create deterministic idempotency key before creating order
-        # This prevents duplicate checkouts on retry
+        # Key includes cart.id to ensure different carts generate different keys
+        # This allows users to make multiple orders in the same session
+        # while still preventing duplicate submissions of the same cart
         payment_method = serializer.validated_data['payment_method']
-        idempotency_key = f"{session_id}_{payment_method}"
+        idempotency_key = f"cart_{cart.id}_{payment_method}"
 
-        # Check if payment already exists (idempotency)
+        # Check if payment already exists for this specific cart (idempotency)
         existing_payment = PaymentTransaction.objects.filter(
             idempotency_key=idempotency_key
         ).select_related('order').first()
 
         if existing_payment:
             # Return existing order instead of creating duplicate
+            # This only happens if the same cart/payment is submitted multiple times
             order = existing_payment.order
             order_serializer = OrderSerializer(order)
             response_data = {
